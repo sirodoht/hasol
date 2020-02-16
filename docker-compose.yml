@@ -17,7 +17,7 @@ services:
                done;
                ./manage.py migrate;
                exec ./manage.py runserver 0.0.0.0:8000"
-    image: nutclean
+    image: hasol
     build: .
     stdin_open: true
     tty: true
