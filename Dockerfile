@@ -12,7 +12,6 @@ RUN pip install -U pip
 COPY requirements.txt /code/
 RUN pip install -Ur /code/requirements.txt
 
-COPY CHECKS /app/
 WORKDIR /code
 COPY . /code/
 RUN /code/manage.py collectstatic --noinput
