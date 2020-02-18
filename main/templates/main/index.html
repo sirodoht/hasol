@@ -1,26 +1,22 @@
+{% extends 'main/layout.html' %}
+
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nutcroft is clean</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
-<body>
-    <nav>
-        <div class="nav-left" style="opacity: 0;">&larr; past</div>
-        <div class="nav-main">Feb 17 &ndash; Feb 23</div>
-        <div class="nav-right" style="opacity: 0;">future &rarr;</div>
-    </nav>
-    <main>
-        {% for a in assignments %}
-        <div class="main-item">
-            <div class="main-item-left">{{ a.mate.name }}</div>
-            <div class="main-item-right">{{ a.job.title }}</div>
-        </div>
-        {% endfor %}
-    </main>
-</body>
-</html>
+{% block content %}
+<nav>
+    <div class="nav-left" style="opacity: 0;">&larr; past</div>
+    <div class="nav-main">Feb 17 &ndash; Feb 23</div>
+    <div class="nav-right" style="opacity: 0;">future &rarr;</div>
+</nav>
+<main>
+    {% for a in assignments %}
+    <div class="main-item">
+        <div class="main-item-left">{{ a.mate.name }}</div>
+        <div class="main-item-right">{{ a.job.title }}</div>
+    </div>
+    {% endfor %}
+</main>
+<footer>
+    <a href="{% url 'main:notification' %}">Get email notification</a>
+</footer>
+{% endblock %}
