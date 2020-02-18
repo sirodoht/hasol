@@ -201,8 +201,8 @@ nav {
     display: flex;
     justify-content: space-between;
     max-width: 500px;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 16px;
+    padding-bottom: 16px;
 }
 
 .nav-main {
@@ -235,10 +235,33 @@ main {
     justify-content: space-between;
     padding-left: 12px;
     padding-right: 12px;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .main-item:nth-child(odd) {
     background: #ececec;
+}
+
+.notification {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+label {
+    display: block;
+    margin-top: 16px;
+}
+
+input {
+    display: block;
+}
+
+input[type="submit"] {
+    margin-top: 16px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 16px;
 }

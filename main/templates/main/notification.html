@@ -1,0 +1,20 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="notification">
+    <p>
+        <a href="{% url 'main:index' %}">&larr; Back</a>
+    </p>
+    <h1>Email Notification</h1>
+    <p>
+        Would you like an email notification every Monday when the new cleaning rota gets published?
+    </p>
+    <form action="{% url 'main:notification' %}" method="post">
+        {{ form }}
+        {% csrf_token %}
+        <input type="submit" value="Submit">
+    </form>
+</div>
+{% endblock %}
