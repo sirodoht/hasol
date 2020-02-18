@@ -5,3 +5,4 @@ from main import models
 admin.site.register(models.Mate)
 admin.site.register(models.Job)
 admin.site.register(models.Assignment)
+admin.site.register(models.Notification)

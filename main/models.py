@@ -24,3 +24,11 @@ class Assignment(models.Model):
 
     def __str__(self):
         return self.mate.name + " - " + self.job.title
+
+
+class Notification(models.Model):
+    email = models.EmailField()
+    mate = models.ForeignKey(Mate, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.email
