@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-<div class="notification">
+<section>
     <p>
         <a href="{% url 'main:index' %}">&larr; Back</a>
     </p>
@@ -16,5 +16,8 @@
         {% csrf_token %}
         <input type="submit" value="Submit">
     </form>
-</div>
+    <div class="section-addendum">
+        <a href="{% url 'main:unsubscribe' %}">Unsubscribe?</a>
+    </div>
+</section>
 {% endblock %}
