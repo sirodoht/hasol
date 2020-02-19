@@ -20,11 +20,16 @@ def notification(request):
     if request.method == "POST":
         form = forms.NotificationForm(request.POST)
         if form.is_valid():
+            email = form.cleaned_data.get("email")
+            mate = form.cleaned_data.get("mate")
+            if models.Notification.objects.filter(mate=mate, email=email).exists():
+                messages.info(request, "This one already exists")
+                return redirect("main:notification")
             form.save()
             messages.success(request, "Notification enabled")
             return redirect("main:index")
         else:
-            messages.error(request, "Invalid password.")
+            messages.error(request, "Invalid input data")
     else:
         form = forms.NotificationForm()
 
