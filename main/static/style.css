@@ -220,6 +220,19 @@ nav {
     display: flex;
 }
 
+.alert {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background: #f1b0b0;
+    color: #fff;
+    text-align: center;
+}
+
 main {
     margin-left: auto;
     margin-right: auto;
@@ -242,12 +255,16 @@ main {
     background: #ececec;
 }
 
-.notification {
+section {
     margin-left: auto;
     margin-right: auto;
     max-width: 500px;
     padding-left: 16px;
     padding-right: 16px;
+}
+
+.section-addendum {
+    margin-top: 36px;
 }
 
 label {
