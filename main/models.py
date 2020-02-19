@@ -24,7 +24,9 @@ class Assignment(models.Model):
     week_start = models.DateField(default=timezone.now)
 
     def __str__(self):
-        return self.mate.name + " - " + self.job.title
+        return (
+            self.week_start.isoformat() + ": " + self.mate.name + " - " + self.job.title
+        )
 
 
 class Notification(models.Model):
