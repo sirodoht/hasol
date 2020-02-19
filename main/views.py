@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from django.contrib import messages
 from django.shortcuts import redirect, render
 
@@ -5,10 +7,12 @@ from main import forms, models
 
 
 def index(request):
+    now = datetime.now()
+    monday_this_week = now - timedelta(days=now.weekday())
     return render(
         request,
         "main/index.html",
-        {"assignments": models.Assignment.objects.filter(week_start="2020-02-17")},
+        {"assignments": models.Assignment.objects.filter(week_start=monday_this_week)},
     )
 
 
