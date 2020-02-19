@@ -8,7 +8,7 @@ def index(request):
     return render(
         request,
         "main/index.html",
-        {"assignments": models.Assignment.objects.filter(week="2020-02-17")},
+        {"assignments": models.Assignment.objects.filter(week_start="2020-02-17")},
     )
 
 
