@@ -21,6 +21,7 @@ class Job(models.Model):
 class Assignment(models.Model):
     mate = models.ForeignKey(Mate, null=True, on_delete=models.SET_NULL)
     job = models.ForeignKey(Job, null=True, on_delete=models.SET_NULL)
+    week_start = models.DateField(default=timezone.now)
 
     def __str__(self):
         return self.mate.name + " - " + self.job.title
