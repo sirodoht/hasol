@@ -34,3 +34,40 @@ def notification(request):
         form = forms.NotificationForm()
 
     return render(request, "main/notification.html", {"form": form})
+
+
+def unsubscribe(request):
+    if request.method == "POST":
+        form = forms.UnsubscribeForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get("email")
+            notifications = models.Notification.objects.filter(email=email)
+            if notifications:
+                notifications.delete()
+                messages.info(request, "Email notification(s) deleted")
+                return redirect("main:unsubscribe")
+            else:
+                messages.warning(request, "Email does not exist in notifications list")
+                return redirect("main:unsubscribe")
+        else:
+            messages.error(request, "Invalid email")
+    else:
+        form = forms.UnsubscribeForm()
+
+    return render(request, "main/unsubscribe.html", {"form": form})
+
+
+def unsubscribe_oneclick(request, key):
+    form = forms.UnsubscribeOneclickForm({"key": key})
+    if form.is_valid():
+        key = form.cleaned_data.get("key")
+        notification = models.Notification.objects.filter(key=key)
+        if notification:
+            notification.delete()
+            messages.success(request, "Unsubscribe successful")
+        else:
+            messages.error(request, "This email is not subscribed")
+    else:
+        messages.error(request, "Who are you?")
+
+    return redirect("main:unsubscribe")
