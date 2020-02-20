@@ -17,7 +17,7 @@
 <main>
     <div class="main-today">
         {% if not is_todays %}
-        <a href="{% url 'main:rota' todays %}" class="main-today-small">(go back to today)</a>
+        <a href="{% url 'main:rota' todays %}" class="main-today-small">(go back current week)</a>
         {% endif %}
     </div>
     {% for a in assignments %}
