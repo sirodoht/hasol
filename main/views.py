@@ -23,9 +23,10 @@ def index(request):
                 week_start=monday_this_week
             ),
             "is_todays": True,
-            "current": monday_this_week.isoformat(),
-            "previous": previous_monday.isoformat(),
-            "next": next_monday.isoformat(),
+            "current": monday_this_week,
+            "current_endweek": monday_this_week + timedelta(days=6),
+            "previous": previous_monday,
+            "next": next_monday,
         },
     )
 
@@ -41,7 +42,7 @@ def rota(request, isodate):
 
     # if date is not a Monday, redirect to the Monday of that week
     if date_requested.weekday() != 0:
-        return redirect("main:rota", isodate=monday_that_week.date().isoformat())
+        return redirect("main:rota", isodate=monday_that_week.date())
 
     # calculate next and previous weeks to the one requested
     previous_monday = monday_that_week - timedelta(days=7)
@@ -55,10 +56,11 @@ def rota(request, isodate):
                 week_start=monday_that_week
             ),
             "is_todays": monday_this_week == monday_that_week,
-            "todays": monday_this_week.isoformat(),
-            "current": monday_that_week.isoformat(),
-            "previous": previous_monday.isoformat(),
-            "next": next_monday.isoformat(),
+            "todays": monday_this_week,
+            "current": monday_that_week,
+            "current_endweek": monday_that_week + timedelta(days=6),
+            "previous": previous_monday,
+            "next": next_monday,
         },
     )
 
