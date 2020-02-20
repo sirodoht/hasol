@@ -7,12 +7,59 @@ from main import forms, models
 
 
 def index(request):
-    now = datetime.now()
+    # calculate today's week
+    now = datetime.now().date()
     monday_this_week = now - timedelta(days=now.weekday())
+
+    # calculate next and previous weeks to the one requested
+    previous_monday = monday_this_week - timedelta(days=7)
+    next_monday = monday_this_week + timedelta(days=7)
+
     return render(
         request,
         "main/index.html",
-        {"assignments": models.Assignment.objects.filter(week_start=monday_this_week)},
+        {
+            "assignments": models.Assignment.objects.filter(
+                week_start=monday_this_week
+            ),
+            "is_todays": True,
+            "current": monday_this_week.isoformat(),
+            "previous": previous_monday.isoformat(),
+            "next": next_monday.isoformat(),
+        },
+    )
+
+
+def rota(request, isodate):
+    # calculate today's week
+    now = datetime.now().date()
+    monday_this_week = now - timedelta(days=now.weekday())
+
+    # calculate requested week
+    date_requested = datetime.strptime(isodate, "%Y-%m-%d").date()
+    monday_that_week = date_requested - timedelta(days=date_requested.weekday())
+
+    # if date is not a Monday, redirect to the Monday of that week
+    if date_requested.weekday() != 0:
+        return redirect("main:rota", isodate=monday_that_week.date().isoformat())
+
+    # calculate next and previous weeks to the one requested
+    previous_monday = monday_that_week - timedelta(days=7)
+    next_monday = monday_that_week + timedelta(days=7)
+
+    return render(
+        request,
+        "main/index.html",
+        {
+            "assignments": models.Assignment.objects.filter(
+                week_start=monday_that_week
+            ),
+            "is_todays": monday_this_week == monday_that_week,
+            "todays": monday_this_week.isoformat(),
+            "current": monday_that_week.isoformat(),
+            "previous": previous_monday.isoformat(),
+            "next": next_monday.isoformat(),
+        },
     )
 
 

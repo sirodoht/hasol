@@ -195,6 +195,11 @@ a:hover {
     text-decoration: underline;
 }
 
+a:focus {
+    color: #fff;
+    background: #0864c7;
+}
+
 nav {
     margin-left: auto;
     margin-right: auto;
@@ -207,17 +212,38 @@ nav {
 
 .nav-main {
     display: flex;
-    border: 1px #ee2c2c solid;
-    padding: 4px 12px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-main-big {
+    display: flex;
     color: #ee2c2c;
+    padding: 4px 12px;
+    border: 1px solid #fff;
+}
+
+.nav-main-big:hover,
+.nav-main-big:focus {
+    text-decoration: none;
+    color: #ee2c2c;
+    background: unset;
+}
+
+.modifier-currrent {
+    border-color: #ee2c2c !important;
 }
 
 .nav-left {
     display: flex;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 .nav-right {
     display: flex;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 .alert {
@@ -255,6 +281,20 @@ main {
     background: #ececec;
 }
 
+.main-today {
+    text-align: center;
+}
+
+.main-today-small {
+    font-size: 11px;
+}
+
+.main-empty {
+    margin-top: 24px;
+    font-size: 14px;
+    text-align: center;
+}
+
 section {
     margin-left: auto;
     margin-right: auto;
@@ -282,5 +322,5 @@ input[type="submit"] {
 
 footer {
     text-align: center;
-    margin-top: 16px;
+    margin-top: 24px;
 }

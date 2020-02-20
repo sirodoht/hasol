@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 
 from main import views
 
@@ -8,6 +8,7 @@ app_name = "main"
 
 urlpatterns = [
     path("", views.index, name="index"),
+    re_path(r"^rota/(?P<isodate>\d{4}-\d{2}-\d{2})/$", views.rota, name="rota"),
     path("notification/", views.notification, name="notification"),
     path("unsubscribe/", views.unsubscribe, name="unsubscribe"),
     path(
