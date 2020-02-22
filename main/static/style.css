@@ -238,12 +238,14 @@ nav {
     display: flex;
     padding-top: 4px;
     padding-bottom: 4px;
+    margin-left: 8px;
 }
 
 .nav-right {
     display: flex;
     padding-top: 4px;
     padding-bottom: 4px;
+    margin-right: 8px;
 }
 
 .alert {
