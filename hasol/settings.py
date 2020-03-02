@@ -126,3 +126,15 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_SSL_REDIRECT = True
+
+
+# Email
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_TLS = True
+EMAIL_HOST = "email-smtp.eu-west-1.amazonaws.com"
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = 587
+
+DEFAULT_FROM_EMAIL = "Mickey <mickey@nutcroft.com>"
