@@ -173,18 +173,18 @@ def calculate(request):
         for a in this_week_assignments:
             rota_content += a.mate.name + " — " + a.job.title + "\n"
 
-        # sent notifications
-        for n in models.Notification.objects.all():
-            send_mail(
-                "Nutcroft is clean!",
-                render_to_string(
-                    "main/rota_announce_email.txt",
-                    {"domain": get_current_site(request).domain, "rota": rota_content},
-                    request=request,
-                ),
-                settings.DEFAULT_FROM_EMAIL,
-                [n.email],
-            )
-            models.NotificationSent.objects.create(notification=n)
+        # # sent notifications
+        # for n in models.Notification.objects.all():
+        #     send_mail(
+        #         "Nutcroft is clean!",
+        #         render_to_string(
+        #             "main/rota_announce_email.txt",
+        #             {"domain": get_current_site(request).domain, "rota": rota_content},
+        #             request=request,
+        #         ),
+        #         settings.DEFAULT_FROM_EMAIL,
+        #         [n.email],
+        #     )
+        #     models.NotificationSent.objects.create(notification=n)
 
     return HttpResponse()
