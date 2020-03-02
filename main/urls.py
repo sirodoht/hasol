@@ -16,4 +16,5 @@ urlpatterns = [
         views.unsubscribe_oneclick,
         name="unsubscribe_oneclick",
     ),
+    path("calculate/", views.calculate, name="calculate"),
 ]
