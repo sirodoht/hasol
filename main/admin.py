@@ -25,7 +25,7 @@ admin.site.register(models.Assignment, AssignmentAdmin)
 
 
 class NotificationAdmin(admin.ModelAdmin):
-    list_display = ("id", "email", "mate", "key")
+    list_display = ("id", "email", "key")
 
 
 admin.site.register(models.Notification, NotificationAdmin)

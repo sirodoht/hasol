@@ -77,8 +77,7 @@ def notification(request):
         form = forms.NotificationForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data.get("email")
-            mate = form.cleaned_data.get("mate")
-            if models.Notification.objects.filter(mate=mate, email=email).exists():
+            if models.Notification.objects.filter(email=email).exists():
                 messages.info(request, "This one already exists")
                 return redirect("main:notification")
             form.save()

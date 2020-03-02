@@ -34,14 +34,10 @@ class Assignment(models.Model):
 
 class Notification(models.Model):
     email = models.EmailField()
-    mate = models.ForeignKey(Mate, on_delete=models.CASCADE)
     key = models.UUIDField(default=uuid.uuid4)
 
-    class Meta:
-        unique_together = (("email", "mate"),)
-
     def __str__(self):
-        return self.email + " – " + self.mate.name + " – " + str(self.key)
+        return self.email + " – " + str(self.key)
 
 
 class NotificationSent(models.Model):
