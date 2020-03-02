@@ -29,6 +29,8 @@ You need to create a new file named `.env` in the root of this project once you 
 ```
 SECRET_KEY="thisisthesecretkey"
 DATABASE_URL="postgres://postgres:postgres@127.0.0.1:5432/postgres"
+EMAIL_HOST_USER="smtp_user"
+EMAIL_HOST_PASSWORD="smtp_password"
 ```
 
 For production use also add:
