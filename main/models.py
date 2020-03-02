@@ -15,6 +15,7 @@ class Mate(models.Model):
 class Job(models.Model):
     title = models.CharField(max_length=300)
     created_at = models.DateTimeField(default=timezone.now)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
@@ -27,7 +28,7 @@ class Assignment(models.Model):
 
     def __str__(self):
         return (
-            self.week_start.isoformat() + ": " + self.mate.name + " - " + self.job.title
+            self.week_start.isoformat() + ": " + self.mate.name + " – " + self.job.title
         )
 
 
@@ -40,4 +41,12 @@ class Notification(models.Model):
         unique_together = (("email", "mate"),)
 
     def __str__(self):
-        return self.email + " - " + self.mate.name + " - " + str(self.key)
+        return self.email + " – " + self.mate.name + " – " + str(self.key)
+
+
+class NotificationSent(models.Model):
+    notification = models.ForeignKey(Notification, on_delete=models.CASCADE)
+    sent_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.sent_at + " – " + self.notification.email
