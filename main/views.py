@@ -1,10 +1,11 @@
+import json
 import random
 from datetime import datetime, timedelta
 
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
-from django.http import HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
@@ -131,6 +132,12 @@ def unsubscribe_oneclick(request, key):
 @csrf_exempt
 def calculate(request):
     if request.method == "POST":
+        # hardcoded authentication
+        body = request.body.decode("utf-8")
+        data = json.loads(body)
+        if data.get("key") != "gooHa4o":
+            return JsonResponse(status=403, data={})
+
         # calculate today's week
         now = datetime.now().date()
         monday_this_week = now - timedelta(days=now.weekday())
@@ -172,18 +179,22 @@ def calculate(request):
         for a in this_week_assignments:
             rota_content += a.mate.name + " — " + a.job.title + "\n"
 
-        # # sent notifications
-        # for n in models.Notification.objects.all():
-        #     send_mail(
-        #         "Nutcroft is clean!",
-        #         render_to_string(
-        #             "main/rota_announce_email.txt",
-        #             {"domain": get_current_site(request).domain, "rota": rota_content},
-        #             request=request,
-        #         ),
-        #         settings.DEFAULT_FROM_EMAIL,
-        #         [n.email],
-        #     )
-        #     models.NotificationSent.objects.create(notification=n)
+        # sent notifications
+        for n in models.Notification.objects.all():
+            send_mail(
+                "Nutcroft is clean!",
+                render_to_string(
+                    "main/rota_announce_email.txt",
+                    {
+                        "domain": get_current_site(request).domain,
+                        "rota": rota_content,
+                        "key": n.key,
+                    },
+                    request=request,
+                ),
+                settings.DEFAULT_FROM_EMAIL,
+                [n.email],
+            )
+            models.NotificationSent.objects.create(notification=n)
 
-    return HttpResponse()
+    return JsonResponse(status=200, data={})

@@ -1,10 +1,8 @@
 Gooood morning!
 
-What a great week this one — the sun is shining,
-the birds are chirping, the sky is blue.
+What a great week this one — the sun is shining, the birds are chirping, the sky is blue.
 
-For yet another week, senior druids and astute philosophers have
-advised the Nutcroft Foundation on the matter of our cleaning rota.
+For yet another week, senior druids and astute philosophers have advised the Nutcroft Foundation on the matter of our cleaning rota.
 
 Triumphantly, I present:
 
@@ -15,3 +13,7 @@ Happy cleaning!
 Mickey
 Nutcroft Foundation
 https://{{ domain }}{% url 'main:index' %}
+
+
+Unsubscribe here:
+https://{{ domain }}{% url 'main:unsubscribe_oneclick' key %}
