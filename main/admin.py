@@ -11,7 +11,7 @@ admin.site.register(models.Mate)
 
 
 class JobAdmin(admin.ModelAdmin):
-    list_display = ("id", "title", "created_at")
+    list_display = ("id", "title", "created_at", "is_active")
 
 
 admin.site.register(models.Job, JobAdmin)
@@ -36,3 +36,10 @@ class NotificationSentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.NotificationSent, NotificationSentAdmin)
+
+
+class TodoAdmin(admin.ModelAdmin):
+    list_display = ("id", "body", "created_at", "completed_at")
+
+
+admin.site.register(models.Todo, TodoAdmin)

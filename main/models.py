@@ -46,3 +46,12 @@ class NotificationSent(models.Model):
 
     def __str__(self):
         return self.sent_at + " – " + self.notification.email
+
+
+class Todo(models.Model):
+    body = models.CharField(max_length=500)
+    created_at = models.DateTimeField(default=timezone.now)
+    completed_at = models.DateTimeField(default=None, null=True)
+
+    def __str__(self):
+        return self.body
