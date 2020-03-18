@@ -328,6 +328,42 @@ input[type="submit"] {
     margin-top: 16px;
 }
 
+.todos-item {
+    cursor: pointer;
+    line-height: 2;
+    border: 1px dashed darksalmon;
+    margin-bottom: 8px;
+    padding-left: 8px;
+    user-select: none;
+}
+
+.todos-item::after {
+    content: "(delete)";
+    float: right;
+    font-size: 12px;
+    color: #aaa;
+    padding-top: 4px;
+    padding-right: 8px;
+}
+
+.history {
+    color: #555;
+}
+
+.history-title {
+    margin-bottom: 4px;
+}
+
+.history-item {
+    margin-left: 8px;
+    color: #777;
+}
+
+.history-item span {
+    text-decoration: line-through;
+    color: #ff8282;
+}
+
 footer {
     text-align: center;
     margin-top: 24px;
