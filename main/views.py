@@ -198,3 +198,34 @@ def calculate(request):
             models.NotificationSent.objects.create(notification=n)
 
     return JsonResponse(status=200, data={})
+
+
+def todo(request):
+    todos = models.Todo.objects.filter(completed_at=None)
+    done_todos = models.Todo.objects.filter(completed_at__isnull=False).order_by(
+        "-completed_at"
+    )
+    if request.method == "POST":
+        form = forms.TodoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "To do saved.")
+            return redirect("main:todo")
+        else:
+            messages.error(request, "Invalid input data")
+    else:
+        form = forms.TodoForm()
+
+    return render(
+        request,
+        "main/todo.html",
+        {"form": form, "todos": todos, "done_todos": done_todos},
+    )
+
+
+def todo_delete(request, todo_id):
+    if request.method == "POST":
+        todo = models.Todo.objects.get(id=todo_id)
+        todo.completed_at = datetime.now()
+        todo.save()
+        return JsonResponse(status=200, data={})
