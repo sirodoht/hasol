@@ -1,0 +1,74 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block content %}
+<section>
+    <div class="section-title">
+        <a href="{% url 'main:index' %}">Home</a>
+    </div>
+    <h1>To-do</h1>
+    <p>
+        Out of dish detergent? Make a note here.
+    </p>
+    <div class="todos">
+        {% for item in todos %}
+        <div class="todos-item" id="todo-id-{{ item.id }}" data-id="{{ item.id }}">{{ item }}</div>
+        {% endfor %}
+    </div>
+    <form action="{% url 'main:todo' %}" method="post">
+        {{ form }}
+        {% csrf_token %}
+        <input type="submit" value="Save">
+    </form>
+    <br>
+    <div class="history">
+        <div class="history-title">Past to-dos:</div>
+        {% for item in done_todos %}
+        <div class="history-item"><span>{{ item.body }}</span> done at {{ item.completed_at|date:"M j, H:i" }}.</div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+
+{% block footer %}
+<script>
+    function getCsrf() {
+        var inputElems = document.querySelectorAll('input');
+        var csrfToken = '';
+        var i = 0;
+        for (i = 0; i < inputElems.length; i++) {
+            if (inputElems[i].name === 'csrfmiddlewaretoken') {
+                csrfToken = inputElems[i].value;
+                break;
+            }
+        }
+        return csrfToken;
+    }
+
+    (function () {
+        const todoElems = document.querySelectorAll('.todos-item');
+        for (const todo of todoElems) {
+            todo.addEventListener('click', function (ev) {
+                const elem = ev.target;
+                if (!window.confirm(`Confirm deleting ${elem.innerText}?`)) {
+                    return;
+                }
+                const url = `/todo/${elem.dataset.id}/delete/`;
+                const req = new XMLHttpRequest();
+                req.addEventListener('load', function (ev) {
+                    if (this.status === 200) {
+                        elem.style.textDecoration = 'line-through';
+                        elem.style.color = 'red';
+                    } else {
+                        console.log(`Error! Status code: ${this.status}.\nResponse: ${this.responseText}`);
+                    }
+                });
+                req.open('POST', url);
+                req.setRequestHeader('X-CSRFToken', getCsrf());
+                req.send();
+            });
+        }
+    })();
+</script>
+{% endblock %}
