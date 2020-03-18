@@ -22,3 +22,12 @@ class UnsubscribeOneclickForm(forms.ModelForm):
     class Meta:
         model = models.Notification
         fields = ["key"]
+
+
+class TodoForm(forms.ModelForm):
+    class Meta:
+        model = models.Todo
+        fields = ["body"]
+        labels = {
+            "body": "Add a new to-do item",
+        }
