@@ -1,5 +1,4 @@
 import json
-import random
 import uuid
 from datetime import datetime, timedelta
 
@@ -131,7 +130,7 @@ def unsubscribe_oneclick(request, key):
 
 
 @csrf_exempt
-def calculate(request):
+def announce(request):
     if request.method == "POST":
         # hardcoded authentication
         body = request.body.decode("utf-8")
@@ -142,7 +141,6 @@ def calculate(request):
         # calculate today's week
         now = datetime.now().date()
         monday_this_week = now - timedelta(days=now.weekday())
-        previous_monday = monday_this_week - timedelta(days=7)
 
         # product email content
         this_week_assignments = models.Assignment.objects.filter(
