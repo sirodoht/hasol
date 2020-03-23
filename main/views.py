@@ -229,3 +229,7 @@ def todo_delete(request, todo_id):
         todo.completed_at = datetime.now()
         todo.save()
         return JsonResponse(status=200, data={})
+
+
+def constitution(request):
+    return render(request, "main/constitution.html")
