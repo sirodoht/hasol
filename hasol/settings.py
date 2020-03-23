@@ -27,6 +27,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "im_a_secret_key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if os.environ.get("NODEBUG") is None else False
 
+ADMINS = [('Theodore', 'zf@sirodoht.com')]
+
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "nutcroft.com"]
 
 
@@ -138,3 +140,5 @@ EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 
 DEFAULT_FROM_EMAIL = "Mickey <mickey@nutcroft.com>"
+SERVER_EMAIL = "Serverius Notus <serverius@nutcroft.com>"
+EMAIL_SUBJECT_PREFIX = "[Nutcroft] "
