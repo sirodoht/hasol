@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import send_mail
+from django.core.mail import send_mail, mail_admins
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
@@ -143,34 +143,6 @@ def calculate(request):
         monday_this_week = now - timedelta(days=now.weekday())
         previous_monday = monday_this_week - timedelta(days=7)
 
-        jobs = models.Job.objects.all()
-        mates = models.Mate.objects.all()
-
-        # # product assignments for every active job
-        # for j in jobs:
-
-        #     # mate should not have the same job as last week
-        #     # we'll try as many mates there are to achieve this
-        #     for i in range(models.Mate.objects.all().count()):
-        #         random_mate = random.choice(mates)
-        #         previous_assignments = models.Assignment.objects.filter(
-        #             week_start=previous_monday, mate=random_mate,
-        #         )
-        #         this_mate_previous_jobs = set()
-        #         for a in previous_assignments:
-        #             this_mate_previous_jobs.add(a.job)
-
-        #         # mate found a job
-        #         if j not in this_mate_previous_jobs:
-        #             mates = mates.exclude(id=random_mate.id)
-        #             break
-        #     else:
-        #         raise RuntimeError("problem")
-
-        #     models.Assignment.objects.create(
-        #         week_start=monday_this_week, mate=random_mate, job=j
-        #     )
-
         # product email content
         this_week_assignments = models.Assignment.objects.filter(
             week_start=monday_this_week
@@ -178,6 +150,22 @@ def calculate(request):
         rota_content = ""
         for a in this_week_assignments:
             rota_content += a.mate.name + " — " + a.job.title + "\n"
+
+        # handle dry run case
+        if data.get("dryrun"):
+            mail_admins(
+                "Nutcroft is clean!",
+                render_to_string(
+                    "main/rota_announce_email.txt",
+                    {
+                        "domain": get_current_site(request).domain,
+                        "rota": rota_content,
+                        "key": n.key,
+                    },
+                    request=request,
+                ),
+            )
+            return JsonResponse(status=200, data={})
 
         # sent notifications
         for n in models.Notification.objects.all():
