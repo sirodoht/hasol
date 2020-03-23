@@ -1,10 +1,10 @@
-Morning Nutcroft!
+Good morning Nutcroftians,
 
 In light of recent events, and according to the Nutcroft Constitution, if a housemate temporarily departs our esteemed society, they shall be relieved of their cleaning duties.
 
 To read the full Nutcroft Constitution, please refer to https://{{ domain }}{% url 'main:constitution' %}.
 
-Now, to the matter at hand:
+Now, for our sublime cleaning rota:
 
 {{ rota }}
 
