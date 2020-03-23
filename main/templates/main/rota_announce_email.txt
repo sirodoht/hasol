@@ -1,14 +1,14 @@
-Gooood morning!
+Morning Nutcroft!
 
-What a great week this one — the sun is shining, the birds are chirping, the sky is blue.
+In light of recent events, and according to the Nutcroft Constitution, if a housemate temporarily departs our esteemed society, they shall be relieved of their cleaning duties.
 
-For yet another week, senior druids and astute philosophers have advised the Nutcroft Foundation on the matter of our cleaning rota.
+To read the full Nutcroft Constitution, please refer to https://{{ domain }}{% url 'main:constitution' %}.
 
-Triumphantly, I present:
+Now, to the matter at hand:
 
 {{ rota }}
 
-Happy cleaning!
+Happy cleaning, everybody!
 
 Mickey
 Nutcroft Foundation
