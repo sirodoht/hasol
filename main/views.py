@@ -1,10 +1,11 @@
 import json
 import random
+import uuid
 from datetime import datetime, timedelta
 
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import send_mail, mail_admins
+from django.core.mail import mail_admins, send_mail
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
@@ -160,7 +161,7 @@ def calculate(request):
                     {
                         "domain": get_current_site(request).domain,
                         "rota": rota_content,
-                        "key": n.key,
+                        "key": uuid.uuid4(),
                     },
                     request=request,
                 ),
