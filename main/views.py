@@ -220,3 +220,7 @@ def todo_delete(request, todo_id):
 
 def constitution(request):
     return render(request, "main/constitution.html")
+
+
+def garden(request):
+    return render(request, "main/garden.html")

@@ -1,0 +1,105 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block content %}
+<section>
+    <div class="section-title">
+        <a href="{% url 'main:index' %}">Home</a>
+    </div>
+    <h1>Garden</h1>
+    <canvas id="garden" width="200" height="500"></canvas>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    var c = document.getElementById('garden');
+    var ctx = c.getContext('2d');
+    ctx.font = "11px monospace";
+
+    // the whole
+    ctx.fillStyle = 'rgb(200, 200, 200)';
+    ctx.fillRect(0, 0, c.width, c.height);
+
+    // garden 3 background
+    ctx.fillStyle = 'rgb(200, 0, 0, 0.4)';
+    ctx.fillRect(40, 0, 160, 130);
+    ctx.stroke();
+
+    // garden 3 tree
+    ctx.beginPath();
+    ctx.arc(180, 95, 20, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fillStyle = 'rgb(0, 0, 0, 1)';
+    ctx.fillText("TREE", 166, 98);
+
+    // garden 3 raspberries
+    ctx.beginPath();
+    ctx.arc(160, 45, 5, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fillStyle = 'rgb(0, 0, 0, 1)';
+    ctx.fillText("RASP", 163, 37);
+
+    // garden 2 background
+    ctx.fillStyle = 'rgba(0, 0, 200, 0.4)';
+    ctx.fillRect(40, 130, 160, 130);
+
+    // garden 2 onion rectangle
+    ctx.beginPath();
+    ctx.rect(50, 140, 30, 50);
+    ctx.stroke();
+
+    // garden 2 onion text
+    ctx.save();
+    ctx.rotate(-Math.PI/2);
+    ctx.fillStyle = 'rgb(0, 0, 0, 1)';
+    ctx.fillText("ONION", -180, 67);
+    ctx.restore();
+
+    // garden 2 parsley rectangle
+    ctx.beginPath();
+    ctx.rect(80, 140, 30, 50);
+    ctx.stroke();
+
+    // garden 2 parsley text
+    ctx.save();
+    ctx.rotate(-Math.PI/2);
+    ctx.fillStyle = 'rgb(0, 0, 0, 1)';
+    ctx.fillText("PARSL", -180, 97);
+    ctx.restore();
+
+    // garden 2 compost rect + text
+    ctx.beginPath();
+    ctx.arc(130, 150, 10, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fillStyle = 'rgb(0, 0, 0, 1)';
+    ctx.fillText("COMP", 120, 175);
+
+    // garden 2 raspberries rectangle
+    ctx.beginPath();
+    ctx.rect(175, 170, 20, 55);
+    ctx.stroke();
+
+    // garden 2 raspberries text
+    ctx.save();
+    ctx.rotate(-Math.PI/2);
+    ctx.fillText("RASPBER", -220, 190);
+    ctx.restore();
+
+    // garden 1 background
+    ctx.fillStyle = 'rgba(0, 200, 0, 0.4)';
+    ctx.fillRect(40, 260, 160, 130);
+
+    // garden 3 some things text
+    ctx.fillStyle = 'rgb(0, 0, 0, 1)';
+    ctx.fillText("SOME OTHER THINGS", 70, 330);
+
+    // house
+    ctx.fillStyle = 'rgba(100, 100, 100, 1)';
+    ctx.fillRect(40, 410, 200, 100);
+    ctx.fillRect(0, 470, 200, 30);
+    ctx.fillStyle = 'rgb(255, 255, 255, 1)';
+    ctx.fillText("KAREN", 100, 440);
+</script>
+{% endblock %}
