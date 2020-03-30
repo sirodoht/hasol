@@ -364,6 +364,18 @@ input[type="submit"] {
     color: #ff8282;
 }
 
+table {
+    width: 100%;
+}
+
+tr:nth-child(odd) {
+    background: #ececec;
+}
+
+td {
+    text-align: center;
+}
+
 footer {
     text-align: center;
     margin-top: 24px;

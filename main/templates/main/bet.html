@@ -1,0 +1,108 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block content %}
+<section>
+    <div class="section-title">
+        <a href="{% url 'main:index' %}">Home</a>
+    </div>
+    <h1>Corona bet</h1>
+    <table>
+        <thead>
+            <tr>
+                <td></td>
+                <td>Groups</td>
+                <td>Primary</td>
+                <td>Vulner</td>
+                <td>Concerts</td>
+                <td>Borders</td>
+                <td>Uni</td>
+                <td>Restaur</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>N</td>
+                <td>60</td>
+                <td>120</td>
+                <td>365</td>
+                <td>250</td>
+                <td>90</td>
+                <td>60</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>Eo</td>
+                <td>63</td>
+                <td>157</td>
+                <td>367</td>
+                <td>187</td>
+                <td>367</td>
+                <td>171</td>
+                <td>63</td>
+            </tr>
+            <tr>
+                <td>El</td>
+                <td>107</td>
+                <td>367</td>
+                <td>367</td>
+                <td>367</td>
+                <td>397</td>
+                <td>267</td>
+                <td>267</td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td>67</td>
+                <td>157</td>
+                <td>100</td>
+                <td>420</td>
+                <td>65</td>
+                <td>157</td>
+                <td>112</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>95</td>
+                <td>180</td>
+                <td>365</td>
+                <td>237</td>
+                <td>237</td>
+                <td>150</td>
+                <td>127</td>
+            </tr>
+            <tr>
+                <td>K</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>S</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ol>
+        <li>Groups: groups of 5 people will be allowed to go out.</li>
+        <li>Primary: primary scholi will open.</li>
+        <li>Vulner: vulnerable people will not be recommended to not go out.</li>
+        <li>Concerts: concerts of 1000 people will be allowed to take place.</li>
+        <li>Borders: UK borders will open for people to leave.</li>
+        <li>Uni: Students will be able to physically go to universities.</li>
+        <li>Restaur: Restaurants will open.</li>
+    </ol>
+</section>
+{% endblock %}

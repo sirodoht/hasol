@@ -224,3 +224,7 @@ def constitution(request):
 
 def garden(request):
     return render(request, "main/garden.html")
+
+
+def bet(request):
+    return render(request, "main/bet.html")
