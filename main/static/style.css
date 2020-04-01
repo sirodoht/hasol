@@ -380,3 +380,7 @@ footer {
     text-align: center;
     margin-top: 24px;
 }
+
+footer a {
+    white-space: nowrap;
+}
