@@ -7,7 +7,7 @@
     <div class="section-title">
         <a href="{% url 'main:index' %}">Home</a>
     </div>
-    <h1>Corona bet</h1>
+    <h1>Corona bet — DAY <span id="countup"></span></h1>
     <table>
         <thead>
             <tr>
@@ -87,4 +87,19 @@
         <li>Restr: restaurants will open.</li>
     </ol>
 </section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    (function () {
+        const ONE_DAY = 24 * 60 * 60 * 1000;  // in milliseconds
+
+        const lockdownStart = new Date(2020, 2, 23);
+        const today = new Date();
+
+        const diffDays = Math.ceil((today - lockdownStart) / ONE_DAY);
+
+        document.getElementById('countup').innerText = diffDays;
+    })();
+</script>
 {% endblock %}
