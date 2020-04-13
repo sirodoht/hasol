@@ -1,14 +1,12 @@
-Good morning Nutcroftians,
+Welcome, to our stunning, new, cleaning rota.
 
-In light of recent events, and according to the Nutcroft Constitution, if a housemate temporarily departs our esteemed society, they shall be relieved of their cleaning duties.
+This week’s updated rota is the best rota we have ever published! The reasons are that we now have separate tasks for cleaning the vacuum cleaner, and cleaning the front porch. Those were introduced in past meetings as part of corridors and bins tasks (respectively), but they are now explicitly included to remind the Nurcroftians.
 
-To read the full Nutcroft Constitution, please refer to https://{{ domain }}{% url 'main:constitution' %}.
-
-Now, for our sublime cleaning rota:
+To the matter at hand—
 
 {{ rota }}
 
-Happy cleaning, everybody!
+Happy cleaning!
 
 Mickey
 Nutcroft Foundation
