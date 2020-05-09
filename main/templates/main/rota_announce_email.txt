@@ -1,6 +1,4 @@
-Good morning Nutcroft!
-
-This week’s rota is follows.
+Adjusted rota for this week and the next.
 
 {{ rota }}
 
