@@ -3,9 +3,10 @@ import uuid
 from datetime import datetime, timedelta
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import mail_admins, send_mail
-from django.http import JsonResponse
+from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
@@ -229,3 +230,74 @@ def garden(request):
 
 def bet(request):
     return render(request, "main/bet.html")
+
+
+@login_required
+def write(request):
+    if request.method == "POST":
+        if not request.user.is_superuser:
+            return HttpResponseForbidden()
+
+        form = forms.WriteForm(request.POST)
+        if form.is_valid():
+            body_content = form.cleaned_data.get("body")
+            dryrun = form.cleaned_data.get("dryrun")
+
+            # calculate today's week
+            now = datetime.now().date()
+            monday_this_week = now - timedelta(days=now.weekday())
+
+            # product email content
+            this_week_assignments = models.Assignment.objects.filter(
+                week_start=monday_this_week
+            )
+            rota_content = ""
+            for a in this_week_assignments:
+                rota_content += a.mate.name + " — " + a.job.title + "\n"
+
+            # handle dry run case
+            if dryrun:
+                mail_admins(
+                    "Nutcroft is clean!",
+                    render_to_string(
+                        "main/rota_announce_custom_email.txt",
+                        {
+                            "domain": get_current_site(request).domain,
+                            "body": body_content,
+                            "rota": rota_content,
+                            "key": uuid.uuid4(),
+                        },
+                        request=request,
+                    ),
+                )
+                messages.success(request, "Dry run executed")
+                return render(request, "main/write.html", {"form": form})
+
+            # sent notifications
+            for n in models.Notification.objects.all():
+                if n.is_active:
+                    send_mail(
+                        "Nutcroft is clean!",
+                        render_to_string(
+                            "main/rota_announce_custom_email.txt",
+                            {
+                                "domain": get_current_site(request).domain,
+                                "body": body_content,
+                                "rota": rota_content,
+                                "key": n.key,
+                            },
+                            request=request,
+                        ),
+                        settings.DEFAULT_FROM_EMAIL,
+                        [n.email],
+                    )
+                    models.NotificationSent.objects.create(notification=n)
+
+            # finish
+            messages.success(request, "Proper run executed")
+        else:
+            messages.error(request, "Invalid email")
+    else:
+        form = forms.WriteForm()
+
+    return render(request, "main/write.html", {"form": form})

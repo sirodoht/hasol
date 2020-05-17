@@ -16,6 +16,7 @@ urlpatterns = [
         views.unsubscribe_oneclick,
         name="unsubscribe_oneclick",
     ),
+    path("write/", views.write, name="write"),
     path("announce/", views.announce, name="announce"),
     path("todo/", views.todo, name="todo"),
     path("todo/<int:todo_id>/delete/", views.todo_delete, name="todo_delete"),
