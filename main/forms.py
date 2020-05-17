@@ -31,3 +31,8 @@ class TodoForm(forms.ModelForm):
         labels = {
             "body": "Add a new to-do item",
         }
+
+
+class WriteForm(forms.Form):
+    body = forms.CharField(widget=forms.Textarea)
+    dryrun = forms.BooleanField(required=False)
