@@ -35,6 +35,7 @@ class Assignment(models.Model):
 class Notification(models.Model):
     email = models.EmailField()
     key = models.UUIDField(default=uuid.uuid4)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.email + " – " + str(self.key)
