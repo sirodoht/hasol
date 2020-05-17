@@ -42,7 +42,7 @@ class Notification(models.Model):
 
 
 class NotificationSent(models.Model):
-    notification = models.ForeignKey(Notification, on_delete=models.CASCADE)
+    notification = models.ForeignKey(Notification, on_delete=models.SET_NULL, null=True)
     sent_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
