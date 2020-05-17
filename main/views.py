@@ -168,21 +168,22 @@ def announce(request):
 
         # sent notifications
         for n in models.Notification.objects.all():
-            send_mail(
-                "Nutcroft is clean!",
-                render_to_string(
-                    "main/rota_announce_email.txt",
-                    {
-                        "domain": get_current_site(request).domain,
-                        "rota": rota_content,
-                        "key": n.key,
-                    },
-                    request=request,
-                ),
-                settings.DEFAULT_FROM_EMAIL,
-                [n.email],
-            )
-            models.NotificationSent.objects.create(notification=n)
+            if n.is_active:
+                send_mail(
+                    "Nutcroft is clean!",
+                    render_to_string(
+                        "main/rota_announce_email.txt",
+                        {
+                            "domain": get_current_site(request).domain,
+                            "rota": rota_content,
+                            "key": n.key,
+                        },
+                        request=request,
+                    ),
+                    settings.DEFAULT_FROM_EMAIL,
+                    [n.email],
+                )
+                models.NotificationSent.objects.create(notification=n)
 
     return JsonResponse(status=200, data={})
 
