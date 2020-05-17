@@ -1,0 +1,13 @@
+{{ body }}
+
+{{ rota }}
+
+Happy cleaning!
+
+Mickey
+Nutcroft Foundation
+https://{{ domain }}{% url 'main:index' %}
+
+
+Unsubscribe here:
+https://{{ domain }}{% url 'main:unsubscribe_oneclick' key %}
