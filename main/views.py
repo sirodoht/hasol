@@ -9,6 +9,7 @@ from django.core.mail import mail_admins, send_mail
 from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
+from django.utils.html import mark_safe
 from django.views.decorators.csrf import csrf_exempt
 
 from hasol import settings
@@ -240,7 +241,7 @@ def write(request):
 
         form = forms.WriteForm(request.POST)
         if form.is_valid():
-            body_content = form.cleaned_data.get("body")
+            body_content = mark_safe(form.cleaned_data.get("body"))
             dryrun = form.cleaned_data.get("dryrun")
 
             # calculate today's week
