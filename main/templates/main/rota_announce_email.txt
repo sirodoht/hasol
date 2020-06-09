@@ -1,4 +1,6 @@
-Adjusted rota for this week and the next.
+Good morning!
+
+Rota for this week
 
 {{ rota }}
 
