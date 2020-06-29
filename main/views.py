@@ -229,6 +229,10 @@ def garden(request):
     return render(request, "main/garden.html")
 
 
+def handbook(request):
+    return render(request, "main/handbook.html")
+
+
 def bet(request):
     return render(request, "main/bet.html")
 
