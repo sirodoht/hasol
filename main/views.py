@@ -131,7 +131,7 @@ def unsubscribe_oneclick(request, key):
     return redirect("main:unsubscribe")
 
 
-@csrf_exempt
+@login_required
 def announce(request):
     if request.method == "POST":
         # hardcoded authentication
